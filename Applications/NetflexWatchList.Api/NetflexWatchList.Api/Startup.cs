@@ -1,12 +1,14 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using NetflexWatchList.Shared;
-
 namespace NetflexWatchList.Api
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using NetflexWatchList.Shared;
+    using NetflexWatchList.Service;
+    using NetflexWatchList.Shared.OptionModels;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -21,7 +23,17 @@ namespace NetflexWatchList.Api
         {
             services.AddControllers();
             services.AddSwaggerGen();
-            services.ConfigureSharedServices();
+            
+            services.AddShared();
+            services.AddService(GetServiceOptions(services));
+        }
+
+        private ServiceOption GetServiceOptions(IServiceCollection services)
+        {
+            return new ServiceOption()
+            {
+                DefaultConnectionString = Configuration.GetConnectionString("DbContextConnectionString")
+            };
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

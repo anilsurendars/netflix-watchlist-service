@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace NetflexWatchList.Shared.Utilities.Interface
+﻿namespace NetflexWatchList.Shared.Utilities.Interface
 {
+    using System;
+
     /// <summary>
     /// The IApplicationTime interface.
     /// </summary>

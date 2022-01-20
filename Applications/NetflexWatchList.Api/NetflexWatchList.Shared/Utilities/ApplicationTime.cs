@@ -1,8 +1,8 @@
-﻿using NetflexWatchList.Shared.Utilities.Interface;
-using System;
-
-namespace NetflexWatchList.Shared.Utilities
+﻿namespace NetflexWatchList.Shared.Utilities
 {
+    using NetflexWatchList.Shared.Utilities.Interface;
+    using System;
+
     /// <summary>
     /// The ApplicationTime implementation.
     /// </summary>
