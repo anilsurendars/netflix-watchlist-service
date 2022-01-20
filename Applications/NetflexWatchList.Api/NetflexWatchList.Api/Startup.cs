@@ -8,6 +8,7 @@ namespace NetflexWatchList.Api
     using NetflexWatchList.Shared;
     using NetflexWatchList.Service;
     using NetflexWatchList.Shared.OptionModels;
+    using System;
 
     public class Startup
     {
@@ -23,9 +24,10 @@ namespace NetflexWatchList.Api
         {
             services.AddControllers();
             services.AddSwaggerGen();
-            
+
             services.AddShared();
             services.AddService(GetServiceOptions(services));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         private ServiceOption GetServiceOptions(IServiceCollection services)

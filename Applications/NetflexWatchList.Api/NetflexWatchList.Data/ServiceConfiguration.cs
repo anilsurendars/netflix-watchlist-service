@@ -3,6 +3,8 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using NetflexWatchList.Data.Context;
+    using NetflexWatchList.Data.Repositories;
+    using NetflexWatchList.Data.Repositories.Interface;
     using NetflexWatchList.Shared.OptionModels;
 
     /// <summary>
@@ -19,6 +21,8 @@
         public static IServiceCollection AddData(this IServiceCollection services, DataOption option)
         {
             services.AddDbContext<INetflixWatchlistDbContext, NetflixWatchlistDbContext>(opt => opt.UseSqlServer(option.ConnectionString));
+
+            services.AddTransient<IUserRepository, UserRepository>();
 
             return services;
         }

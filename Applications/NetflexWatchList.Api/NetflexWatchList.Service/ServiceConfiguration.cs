@@ -2,6 +2,8 @@
 {
     using Microsoft.Extensions.DependencyInjection;
     using NetflexWatchList.Data;
+    using NetflexWatchList.Service.Repositories;
+    using NetflexWatchList.Service.Repositories.Interface;
     using NetflexWatchList.Shared.OptionModels;
 
     /// <summary>
@@ -18,6 +20,8 @@
         public static IServiceCollection AddService(this IServiceCollection services, ServiceOption option)
         {
             services.AddData(ConstructDataOptions(option));
+
+            services.AddTransient<IUserService, UserService>();
 
             return services;
         }
