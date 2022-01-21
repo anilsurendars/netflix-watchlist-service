@@ -54,6 +54,8 @@
         public async Task<UserServiceModel> Create(UserServiceModel userServiceModel)
         {
             var userEntity = _mapper.Map<User>(userServiceModel);
+            userEntity.IsActive = true;
+
             var responseEntity = await _userRepo.Create(userEntity);
 
             return _mapper.Map<UserServiceModel>(responseEntity);

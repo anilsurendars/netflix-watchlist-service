@@ -1,6 +1,7 @@
 ﻿namespace NetflexWatchList.Api.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Text.Json.Serialization;
 
     /// <summary>
@@ -23,6 +24,7 @@
         /// <value>
         /// The name.
         /// </value>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
@@ -31,6 +33,8 @@
         /// <value>
         /// The email address.
         /// </value>
+        [Required]
+        [EmailAddress]
         public string EmailAddress { get; set; }
 
         /// <summary>

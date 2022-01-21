@@ -46,6 +46,9 @@
         {
             try
             {
+                var existingUser = await GetByEmail(userEntity.Email);
+                if (existingUser != null) { return null; }
+
                 _context.Users.Add(userEntity);
                 await _context.SaveChangesAsync().ConfigureAwait(false);
 
