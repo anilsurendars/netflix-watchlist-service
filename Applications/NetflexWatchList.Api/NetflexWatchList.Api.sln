@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetflexWatchList.Api", "NetflexWatchList.Api\NetflexWatchList.Api.csproj", "{30F21AE6-14CC-4C19-AB6B-8A4C40A2AD14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetflexWatchList.Api", "NetflexWatchList.Api\NetflexWatchList.Api.csproj", "{30F21AE6-14CC-4C19-AB6B-8A4C40A2AD14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetflexWatchList.Shared", "NetflexWatchList.Shared\NetflexWatchList.Shared.csproj", "{70ABCD07-29B6-42CE-82CF-BD428CED047C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetflexWatchList.Shared", "NetflexWatchList.Shared\NetflexWatchList.Shared.csproj", "{70ABCD07-29B6-42CE-82CF-BD428CED047C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetflexWatchList.Data", "NetflexWatchList.Data\NetflexWatchList.Data.csproj", "{ECCF8E9E-CE94-4B79-BA31-0D3D2A9C2AB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetflexWatchList.Data", "NetflexWatchList.Data\NetflexWatchList.Data.csproj", "{ECCF8E9E-CE94-4B79-BA31-0D3D2A9C2AB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetflexWatchList.Service", "NetflexWatchList.Service\NetflexWatchList.Service.csproj", "{C4B0356E-D06A-491D-BBBD-A94319D12C2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetflexWatchList.Service", "NetflexWatchList.Service\NetflexWatchList.Service.csproj", "{C4B0356E-D06A-491D-BBBD-A94319D12C2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetflexWatchList.AntiCorruption", "NetflexWatchList.AntiCorruption\NetflexWatchList.AntiCorruption.csproj", "{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C4B0356E-D06A-491D-BBBD-A94319D12C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4B0356E-D06A-491D-BBBD-A94319D12C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4B0356E-D06A-491D-BBBD-A94319D12C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
