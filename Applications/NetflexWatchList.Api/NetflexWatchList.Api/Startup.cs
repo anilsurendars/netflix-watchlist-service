@@ -9,6 +9,7 @@ namespace NetflexWatchList.Api
     using NetflexWatchList.Service;
     using NetflexWatchList.Shared.OptionModels;
     using System;
+    using NetflexWatchList.Api.Security;
 
     public class Startup
     {
@@ -26,11 +27,12 @@ namespace NetflexWatchList.Api
             services.AddSwaggerGen();
 
             services.AddShared();
-            services.AddService(GetServiceOptions(services));
+            services.AddService(GetServiceOptions());
+            services.AddTransient<IJwtAuthService, JwtAuthService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
-        private ServiceOption GetServiceOptions(IServiceCollection services)
+        private ServiceOption GetServiceOptions()
         {
             return new ServiceOption()
             {

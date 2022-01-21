@@ -1,14 +1,13 @@
-﻿namespace NetflexWatchList.Data.Entities
+﻿namespace NetflexWatchList.Api.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Text.Json.Serialization;
 
     /// <summary>
-    /// The user.
+    /// The Register model.
     /// </summary>
-    [Table("User")]
-    public class User
+    public class RegisterModel
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -16,8 +15,7 @@
         /// <value>
         /// The identifier.
         /// </value>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [JsonIgnore]
         public Guid Id { get; set; }
 
         /// <summary>
@@ -26,6 +24,7 @@
         /// <value>
         /// The name.
         /// </value>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
@@ -34,7 +33,9 @@
         /// <value>
         /// The email address.
         /// </value>
-        public string Email { get; set; }
+        [Required]
+        [EmailAddress]
+        public string EmailAddress { get; set; }
 
         /// <summary>
         /// Gets or sets the password.
@@ -42,6 +43,7 @@
         /// <value>
         /// The password.
         /// </value>
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         /// <summary>
@@ -51,13 +53,5 @@
         /// The address.
         /// </value>
         public string Address { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is active.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsActive { get; set; }
     }
 }

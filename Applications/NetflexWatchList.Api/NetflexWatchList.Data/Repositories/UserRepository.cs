@@ -71,7 +71,7 @@
         {
             try
             {
-                return _context.Users.FirstOrDefault(x => x.Email == email);
+                return await Task.FromResult(_context.Users.FirstOrDefault(x => x.Email == email));
             }
             catch (Exception)
             {
@@ -90,7 +90,7 @@
         {
             try
             {
-                return _context.Users.SingleOrDefault(x => x.Id == id);
+                return await Task.FromResult(_context.Users.SingleOrDefault(x => x.Id == id));
             }
             catch (Exception)
             {

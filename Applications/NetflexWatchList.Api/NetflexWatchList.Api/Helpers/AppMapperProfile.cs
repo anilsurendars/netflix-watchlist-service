@@ -25,6 +25,8 @@
         {
             CreateMap<UserServiceModel, UserModel>();
             CreateMap<UserModel, UserServiceModel>();
+            CreateMap<RegisterModel, UserServiceModel>()
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src=> BCrypt.Net.BCrypt.HashPassword(src.Password))); 
         }
     }
 }
