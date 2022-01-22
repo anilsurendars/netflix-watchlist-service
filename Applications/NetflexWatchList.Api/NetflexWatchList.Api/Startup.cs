@@ -58,6 +58,13 @@ namespace NetflexWatchList.Api
 
             app.UseRouting();
 
+            app.UseCors(options => options
+                .WithOrigins(new[] { "http://localhost:3000", "http://localhost:8080", "http://localhost:4200" })
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+            );
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
