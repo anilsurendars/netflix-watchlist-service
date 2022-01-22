@@ -1,6 +1,9 @@
 ﻿namespace NetflexWatchList.AntiCorruption.ExternalApis
 {
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
     using NetflexWatchList.AntiCorruption.ExternalApis.Interface;
+    using NetflexWatchList.Shared.OptionModels;
 
     /// <summary>
     /// The IMDbApi Connector implementation.
@@ -8,6 +11,15 @@
     /// <seealso cref="NetflexWatchList.AntiCorruption.ExternalApis.Interface.IImdbApiConnector" />
     public class ImdbApiConnector : IImdbApiConnector
     {
+        private readonly IMDbApiOption _option;
+        private readonly ILogger<IImdbApiConnector> _logger;
+
+        public ImdbApiConnector(IOptions<IMDbApiOption> option, ILogger<IImdbApiConnector> logger)
+        {
+            _option = option.Value;
+            _logger = logger;
+        }
+
         /// <summary>
         /// Gets the episodes.
         /// </summary>

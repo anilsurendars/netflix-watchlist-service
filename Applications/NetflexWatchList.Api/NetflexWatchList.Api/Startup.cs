@@ -30,6 +30,8 @@ namespace NetflexWatchList.Api
             services.AddSwaggerGen();
 
             services.Configure<JwtOption>(c => Configuration.GetSection(nameof(JwtOption)).Bind(c));
+            services.Configure<IMDbApiOption>(c => Configuration.GetSection(nameof(IMDbApiOption)).Bind(c));
+
             AddSimpleJwtAuthentication(services);
 
             services.AddShared();
@@ -37,7 +39,6 @@ namespace NetflexWatchList.Api
             services.AddTransient<IJwtAuthService, JwtAuthService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
