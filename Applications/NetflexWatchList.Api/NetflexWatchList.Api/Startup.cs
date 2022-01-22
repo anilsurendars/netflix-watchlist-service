@@ -10,6 +10,9 @@ namespace NetflexWatchList.Api
     using NetflexWatchList.Shared.OptionModels;
     using System;
     using NetflexWatchList.Api.Security;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Text;
 
     public class Startup
     {
@@ -26,19 +29,15 @@ namespace NetflexWatchList.Api
             services.AddControllers();
             services.AddSwaggerGen();
 
+            services.Configure<JwtOption>(c => Configuration.GetSection(nameof(JwtOption)).Bind(c));
+            AddSimpleJwtAuthentication(services);
+
             services.AddShared();
             services.AddService(GetServiceOptions());
             services.AddTransient<IJwtAuthService, JwtAuthService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
-        private ServiceOption GetServiceOptions()
-        {
-            return new ServiceOption()
-            {
-                DefaultConnectionString = Configuration.GetConnectionString("DbContextConnectionString")
-            };
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -65,12 +64,41 @@ namespace NetflexWatchList.Api
                 .AllowCredentials()
             );
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void AddSimpleJwtAuthentication(IServiceCollection services)
+        {
+            var jwtSecret = Configuration["JwtOption:JwtSecret"];
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(option =>
+                {
+                    option.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = AppConstants.Issuer,
+                        ValidAudience = AppConstants.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
+        }
+
+        private ServiceOption GetServiceOptions()
+        {
+            return new ServiceOption()
+            {
+                DefaultConnectionString = Configuration.GetConnectionString("DbContextConnectionString")
+            };
         }
     }
 }

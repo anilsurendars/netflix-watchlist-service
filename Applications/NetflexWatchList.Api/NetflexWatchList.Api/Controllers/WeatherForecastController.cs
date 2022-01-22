@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NetflexWatchList.Shared.Utilities.Interface;
 using System;
@@ -9,6 +10,7 @@ namespace NetflexWatchList.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class WeatherForecastController : BaseController
     {
         private static readonly string[] Summaries = new[]

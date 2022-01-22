@@ -1,6 +1,7 @@
 ﻿namespace NetflexWatchList.Api.Controllers
 {
     using AutoMapper;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using NetflexWatchList.Api.Models;
@@ -13,8 +14,9 @@
     /// The UserController.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
-    
+
     [ApiController]
+    [Authorize]
     public class UserController : BaseController
     {
         /// <summary>
@@ -57,7 +59,7 @@
             UserModel response = null;
 
             var serviceModel = await _userService.GetByEmail(email);
-            if(serviceModel is not null)
+            if (serviceModel is not null)
             {
                 response = _mapper.Map<UserModel>(serviceModel);
             }
@@ -72,7 +74,7 @@
         /// <returns>The action result.</returns>
         [HttpGet]
         [Route("api/v1/user/get/{id}")]
-        public async Task<IActionResult> GetUser([FromRoute]Guid id)
+        public async Task<IActionResult> GetUser([FromRoute] Guid id)
         {
             UserModel response = null;
 
@@ -102,7 +104,7 @@
             var serviceModel = _mapper.Map<UserServiceModel>(model);
             var user = await _userService.Create(serviceModel);
 
-            return user is null? NotFound("user already exist.") : new OkObjectResult(_mapper.Map<UserModel>(user));
+            return user is null ? NotFound("user already exist.") : new OkObjectResult(_mapper.Map<UserModel>(user));
         }
     }
 }

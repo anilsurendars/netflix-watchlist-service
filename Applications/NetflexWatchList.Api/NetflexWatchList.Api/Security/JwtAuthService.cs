@@ -1,8 +1,12 @@
 ﻿namespace NetflexWatchList.Api.Security
 {
+    using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
+    using NetflexWatchList.Shared;
+    using NetflexWatchList.Shared.OptionModels;
     using System;
     using System.IdentityModel.Tokens.Jwt;
+    using System.Security.Claims;
     using System.Text;
 
     /// <summary>
@@ -14,7 +18,12 @@
         /// <summary>
         /// The secure key.
         /// </summary>
-        private readonly string secureKey = "secure key for Netflix watchlist service";
+        private readonly JwtOption _option;
+
+        public JwtAuthService(IOptions<JwtOption> option)
+        {
+            _option = option.Value;
+        }
 
         /// <summary>
         /// Generates the token.
@@ -25,14 +34,26 @@
         /// </returns>
         public string GenerateToken(Guid userId)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secureKey));
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_option.JwtSecret));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-            var jwtHeader = new JwtHeader(signingCredentials);
 
-            var payload = new JwtPayload(userId.ToString(), null, null, null, DateTime.Today.AddMinutes(10));
-            var securityToken = new JwtSecurityToken(jwtHeader, payload);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(type: ClaimTypes.Name, value: userId.ToString())
+                }),
+                IssuedAt = DateTime.UtcNow,
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = signingCredentials,
+                Issuer = AppConstants.Issuer,
+                Audience = AppConstants.Audience
+            };
 
-            return new JwtSecurityTokenHandler().WriteToken(securityToken);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
         /// <summary>
@@ -45,7 +66,7 @@
         public JwtSecurityToken Validate(string jwtToken)
         {
             var securityTokenHandler = new JwtSecurityTokenHandler();
-            var secureKey = Encoding.ASCII.GetBytes(this.secureKey);
+            var secureKey = Encoding.ASCII.GetBytes(_option.JwtSecret);
 
             securityTokenHandler.ValidateToken(jwtToken, new TokenValidationParameters
             {

@@ -1,7 +1,7 @@
 ﻿namespace NetflexWatchList.Api.Controllers
 {
     using AutoMapper;
-    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using NetflexWatchList.Api.Models;
@@ -59,6 +59,7 @@
         /// <returns>The actionresult.</returns>
         [Route("api/v1/auth/register")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterModel model)
         {
             if (!ModelState.IsValid)
@@ -82,6 +83,7 @@
         /// <returns>The actionresult.</returns>
         [Route("api/v1/auth/login")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginModel model)
         {
             if (!ModelState.IsValid)
@@ -100,31 +102,11 @@
 
             var jwt = _jwtService.GenerateToken(user.Id);
 
-            Response.Cookies.Append("jwt", jwt, new CookieOptions
+            return new OkObjectResult(new
             {
-                HttpOnly = true
+                message = "success",
+                token = jwt
             });
-
-            return Ok(new
-            {
-                message = "success"
-            });
-        }
-
-        /// <summary>
-        /// Logouts this instance.
-        /// </summary>
-        /// <returns>The actionResult.</returns>
-        [Route("api/v1/auth/logout")]
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            Response.Cookies.Delete("jwt");
-
-            return await Task.FromResult(new OkObjectResult(new
-            {
-                message = "success"
-            }));
         }
     }
 }
