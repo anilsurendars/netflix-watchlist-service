@@ -1,13 +1,13 @@
-﻿using NetflexWatchList.Shared.ExternalModels;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace NetflexWatchList.AntiCorruption.ExternalApis.Interface
+﻿namespace NetflexWatchList.Service.Services.Interface
 {
+    using NetflexWatchList.Shared.ExternalModels;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     /// <summary>
-    /// The IMDbApi Connector interface.
+    /// The IImdbService interface.
     /// </summary>
-    public interface IImdbApiConnector
+    public interface IImdbService
     {
         /// <summary>
         /// Gets the shows.
@@ -34,7 +34,9 @@ namespace NetflexWatchList.AntiCorruption.ExternalApis.Interface
         /// <summary>
         /// Gets all shows.
         /// </summary>
-        /// <returns>The list of IMDb tv series data.</returns>
+        /// <returns>
+        /// The list of IMDb tv series data.
+        /// </returns>
         Task<IList<ImdbTvSeriesData>> GetAllShows();
     }
 }

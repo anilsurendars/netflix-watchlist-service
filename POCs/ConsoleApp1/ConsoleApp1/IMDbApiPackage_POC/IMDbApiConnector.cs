@@ -35,6 +35,14 @@ namespace ConsoleApp1.IMDbApiPackage_POC
             return data;
         }
 
+        public async Task<Top250Data> Top250TvSerials()
+        {
+            var data = await apiLib.Top250TVsAsync();
+
+            return data;
+        }
+
+
         public async Task<object> AdvanceSearchForEpisodes()
         {
             // AdvancedSearch

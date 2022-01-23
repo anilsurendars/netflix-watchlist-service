@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NetflexWatchList.AntiCorruption\NetflexWatchList.AntiCorruption.csproj" />
     <ProjectReference Include="..\NetflexWatchList.Data\NetflexWatchList.Data.csproj" />
     <ProjectReference Include="..\NetflexWatchList.Shared\NetflexWatchList.Shared.csproj" />
   </ItemGroup>

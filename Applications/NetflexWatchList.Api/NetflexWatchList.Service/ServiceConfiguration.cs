@@ -1,9 +1,12 @@
 ﻿namespace NetflexWatchList.Service
 {
     using Microsoft.Extensions.DependencyInjection;
+    using NetflexWatchList.AntiCorruption;
     using NetflexWatchList.Data;
     using NetflexWatchList.Service.Repositories;
     using NetflexWatchList.Service.Repositories.Interface;
+    using NetflexWatchList.Service.Services;
+    using NetflexWatchList.Service.Services.Interface;
     using NetflexWatchList.Shared.OptionModels;
 
     /// <summary>
@@ -20,8 +23,10 @@
         public static IServiceCollection AddService(this IServiceCollection services, ServiceOption option)
         {
             services.AddData(ConstructDataOptions(option));
+            services.AddAntiCurruption();
 
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IImdbService, ImdbService>();
 
             return services;
         }
