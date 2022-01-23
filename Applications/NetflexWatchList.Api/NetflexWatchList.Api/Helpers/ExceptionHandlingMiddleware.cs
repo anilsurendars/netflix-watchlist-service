@@ -56,7 +56,7 @@
             message = exception.ToString();
 #endif
 
-            var result = JsonSerializer.Serialize(new { error = message, errorCode = errorCode });
+            var result = JsonSerializer.Serialize(new { error = message, errorCode });
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)status;

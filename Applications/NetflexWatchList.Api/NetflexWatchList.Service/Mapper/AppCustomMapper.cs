@@ -19,6 +19,8 @@
         /// <returns>The TvShow.</returns>
         public static TvShow ToEntity(this ImdbShow data, string userId)
         {
+            if (data == null) { return null; }
+
             var entity = new TvShow()
             {
                 IMDbId = data.Id,
@@ -48,6 +50,8 @@
         /// <returns></returns>
         public static ImdbShow ToServiceModel(this TvShow tvShow)
         {
+            if (tvShow == null) { return null; }
+
             var showModel = new ImdbShow()
             {
                 Id = tvShow.IMDbId,
@@ -72,6 +76,8 @@
         /// <returns>The ImdbEpisode.</returns>
         public static ImdbEpisode ToServiceModel(this ShowEpisode episode)
         {
+            if (episode == null) { return null; }
+
             return new ImdbEpisode()
             {
                 Id = episode.EpisodeId,
