@@ -24,7 +24,7 @@ The goal of this service is to create a API to allow users to track the TV shows
 
 **API Endpoint details**
 
-Technology used: **.Net6 API & SQL-Server**
+Technology used: **.Net core 3.1 WebApi, EFCore, Automapper, InMemorycache, IMDbApi package & SQL-Server**
 
 1) User
 	Register - Register new user to the system
