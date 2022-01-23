@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetflexWatchList.Data", "Ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetflexWatchList.Service", "NetflexWatchList.Service\NetflexWatchList.Service.csproj", "{C4B0356E-D06A-491D-BBBD-A94319D12C2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetflexWatchList.AntiCorruption", "NetflexWatchList.AntiCorruption\NetflexWatchList.AntiCorruption.csproj", "{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetflexWatchList.AntiCorruption", "NetflexWatchList.AntiCorruption\NetflexWatchList.AntiCorruption.csproj", "{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NetflexWatchlist.Database", "NetflexWatchlist.Database\NetflexWatchlist.Database.sqlproj", "{258D7939-5700-4D1D-9D6C-1D1769B0AC11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,12 @@ Global
 		{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{234329E7-DEE4-4FBE-AF56-C7A3313B8DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{258D7939-5700-4D1D-9D6C-1D1769B0AC11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{258D7939-5700-4D1D-9D6C-1D1769B0AC11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{258D7939-5700-4D1D-9D6C-1D1769B0AC11}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{258D7939-5700-4D1D-9D6C-1D1769B0AC11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{258D7939-5700-4D1D-9D6C-1D1769B0AC11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{258D7939-5700-4D1D-9D6C-1D1769B0AC11}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
