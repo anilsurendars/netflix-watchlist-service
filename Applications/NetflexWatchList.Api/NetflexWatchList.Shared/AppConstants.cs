@@ -19,5 +19,10 @@
         /// The audience.
         /// </summary>
         public static string Audience = "Audience";
+
+        /// <summary>
+        /// The get all shows.
+        /// </summary>
+        public static string GetAllShows = "GetAllShows";
     }
 }

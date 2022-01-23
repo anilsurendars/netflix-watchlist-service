@@ -2,19 +2,42 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
     using NetflexWatchList.Service.Services.Interface;
+    using NetflexWatchList.Shared;
+    using NetflexWatchList.Shared.ExternalModels;
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// The Dashboard.
+    /// </summary>
+    /// <seealso cref="NetflexWatchList.Api.Controllers.BaseController" />
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class DashboardController : BaseController
     {
+        /// <summary>
+        /// The imdb service.
+        /// </summary>
         private readonly IImdbService _imdbService;
 
-        public DashboardController(IImdbService imdbService)
+        /// <summary>
+        /// The cache.
+        /// </summary>
+        private readonly IMemoryCache _cache;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DashboardController"/> class.
+        /// </summary>
+        /// <param name="imdbService">The imdb service.</param>
+        /// <param name="cache">The cache.</param>
+        public DashboardController(IImdbService imdbService, IMemoryCache cache)
         {
             _imdbService = imdbService;
+            _cache = cache;
         }
 
         /// <summary>
@@ -26,9 +49,17 @@
         [Route("api/v1/dashboard/shows/getall")]
         public async Task<IActionResult> GetAllShows()
         {
-            var tvSerieslist = await _imdbService.GetAllShows();
+            if (!_cache.TryGetValue(AppConstants.GetAllShows, out IList<ImdbTvSeriesData> tvSerieslist))
+            {
+                tvSerieslist = await _imdbService.GetAllShows();
 
-            return !tvSerieslist.Any() ? BadRequest(new { message = "Not available." }) : new OkObjectResult(tvSerieslist);
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                   .SetAbsoluteExpiration(TimeSpan.FromHours(1));
+
+                _cache.Set(AppConstants.GetAllShows, tvSerieslist, cacheEntryOptions);
+            }
+
+            return new OkObjectResult(tvSerieslist);
         }
 
         /// <summary>

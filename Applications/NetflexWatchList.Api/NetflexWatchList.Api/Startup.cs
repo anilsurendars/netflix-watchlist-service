@@ -27,6 +27,7 @@ namespace NetflexWatchList.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMemoryCache();
             services.AddSwaggerGen();
 
             services.Configure<JwtOption>(c => Configuration.GetSection(nameof(JwtOption)).Bind(c));
