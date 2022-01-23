@@ -13,6 +13,7 @@ namespace NetflexWatchList.Api
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.IdentityModel.Tokens;
     using System.Text;
+    using NetflexWatchList.Api.Helpers;
 
     public class Startup
     {
@@ -65,6 +66,8 @@ namespace NetflexWatchList.Api
                 .AllowAnyMethod()
                 .AllowCredentials()
             );
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseAuthentication();
             app.UseAuthorization();
