@@ -5,7 +5,7 @@
     /// <summary>
     /// The IMDbShow.
     /// </summary>
-    public class ImdbShow
+    public class ImdbShow : ImdbSearchResult
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IMDbShow"/> class.

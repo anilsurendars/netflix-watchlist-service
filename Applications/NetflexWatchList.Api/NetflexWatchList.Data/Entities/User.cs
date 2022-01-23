@@ -7,7 +7,7 @@
     /// <summary>
     /// The user.
     /// </summary>
-    [Table("User")]
+    [Table(nameof(User))]
     public class User
     {
         /// <summary>

@@ -27,21 +27,21 @@
         /// </value>
         public DbSet<User> Users { get; set; }
 
-        ///// <summary>
-        ///// Gets or sets the shows.
-        ///// </summary>
-        ///// <value>
-        ///// The shows.
-        ///// </value>
-        //public DbSet<object> Shows { get; set; }
+        /// <summary>
+        /// Gets or sets the shows.
+        /// </summary>
+        /// <value>
+        /// The shows.
+        /// </value>
+        public DbSet<TvShow> Shows { get; set; }
 
-        ///// <summary>
-        ///// Gets or sets the episodes.
-        ///// </summary>
-        ///// <value>
-        ///// The episodes.
-        ///// </value>
-        //public DbSet<object> Episodes { get; set; }
+        /// <summary>
+        /// Gets or sets the episodes.
+        /// </summary>
+        /// <value>
+        /// The episodes.
+        /// </value>
+        public DbSet<ShowEpisode> Episodes { get; set; }
 
         /// <summary>
         /// Override this method to further configure the model that was discovered by convention from the entity types
@@ -57,7 +57,7 @@
         /// </remarks>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
         }
     }
 }

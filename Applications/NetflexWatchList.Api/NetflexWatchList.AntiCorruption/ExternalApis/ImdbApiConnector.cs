@@ -37,7 +37,7 @@
         /// <returns>
         /// The list of IMDbSearchResult.
         /// </returns>
-        public async Task<IList<ImdbSearchResult>> GetShows(string title)
+        public async Task<IList<ImdbSearchResult>> SearchShowByTitle(string title)
         {
             var titleData = await _imdbApi.SearchSeries(title);
             return _mapper.Map<List<ImdbSearchResult>>(titleData.Results);
@@ -50,7 +50,7 @@
         /// <returns>
         /// The IMDbShow.
         /// </returns>
-        public async Task<ImdbShow> GetShowById(string id)
+        public async Task<ImdbShow> GetShowByIMDbId(string id)
         {
             var showData = await _imdbApi.SearchTitle(id);
             var show = _mapper.Map<ImdbShow>(showData);
@@ -77,7 +77,7 @@
         /// <returns>
         /// The list of ImdbEpisode.
         /// </returns>
-        public async Task<IList<ImdbEpisode>> GetEpisodes(string imdbId, int seasonNumber)
+        public async Task<IList<ImdbEpisode>> GetEpisodesByIMDbIdAndSeasonNumber(string imdbId, int seasonNumber)
         {
             var episodeData = await _imdbApi.SearchEpisodes(imdbId, seasonNumber);
             return _mapper.Map<List<ImdbEpisode>>(episodeData.Episodes);

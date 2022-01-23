@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using NetflexWatchList.Data.Entities;
+    using NetflexWatchList.Shared.ExternalModels;
     using NetflexWatchList.Shared.ServiceModel;
 
     /// <summary>
@@ -16,6 +17,13 @@
         public ApplicationMapperProfile()
         {
             UserMapperProfile();
+            ShowMapperProfile();
+        }
+
+        private void ShowMapperProfile()
+        {
+            //CreateMap<ImdbShow, TvShow>();
+            //CreateMap<TvShow, ImdbShow>();
         }
 
         /// <summary>

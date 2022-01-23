@@ -1,6 +1,7 @@
 ﻿namespace NetflexWatchList.Data.Context
 {
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
     using NetflexWatchList.Data.Entities;
     using System.Threading;
     using System.Threading.Tasks;
@@ -24,6 +25,14 @@
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Entries the specified entity.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <returns></returns>
+        EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
+
+        /// <summary>
         /// Gets or sets the users.
         /// </summary>
         /// <value>
@@ -31,20 +40,20 @@
         /// </value>
         DbSet<User> Users { get; set; }
 
-        ///// <summary>
-        ///// Gets or sets the shows.
-        ///// </summary>
-        ///// <value>
-        ///// The shows.
-        ///// </value>
-        //DbSet<object> Shows { get; set; }
+        /// <summary>
+        /// Gets or sets the shows.
+        /// </summary>
+        /// <value>
+        /// The shows.
+        /// </value>
+        DbSet<TvShow> Shows { get; set; }
 
-        ///// <summary>
-        ///// Gets or sets the episodes.
-        ///// </summary>
-        ///// <value>
-        ///// The episodes.
-        ///// </value>
-        //DbSet<object> Episodes { get; set; }
+        /// <summary>
+        /// Gets or sets the episodes.
+        /// </summary>
+        /// <value>
+        /// The episodes.
+        /// </value>
+        DbSet<ShowEpisode> Episodes { get; set; }
     }
 }

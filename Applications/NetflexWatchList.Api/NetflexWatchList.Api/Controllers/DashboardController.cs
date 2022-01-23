@@ -16,7 +16,7 @@
     /// </summary>
     /// <seealso cref="NetflexWatchList.Api.Controllers.BaseController" />
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class DashboardController : BaseController
     {
         /// <summary>
@@ -46,12 +46,12 @@
         /// <param name="email">The email.</param>
         /// <returns>The action result.</returns>
         [HttpGet]
-        [Route("api/v1/dashboard/shows/getall")]
+        [Route("api/v1/dashboard/show/getall")]
         public async Task<IActionResult> GetAllShows()
         {
             if (!_cache.TryGetValue(AppConstants.GetAllShows, out IList<ImdbTvSeriesData> tvSerieslist))
             {
-                tvSerieslist = await _imdbService.GetAllShows();
+                tvSerieslist = await _imdbService.GetAllIMDbShows();
 
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                    .SetAbsoluteExpiration(TimeSpan.FromHours(1));
@@ -68,12 +68,12 @@
         /// <param name="title">The title.</param>
         /// <returns>The actionresult.</returns>
         [HttpGet]
-        [Route("api/v1/dashboard/shows/search")]
-        public async Task<IActionResult> SearchShow(string title)
+        [Route("api/v1/dashboard/show/search")]
+        public async Task<IActionResult> SearchShowByTitle(string title)
         {
             if (string.IsNullOrEmpty(title)) { return BadRequest("Invalid parameter."); }
 
-            var showSearchResult = await _imdbService.GetShows(title);
+            var showSearchResult = await _imdbService.SearchShowByTitle(title);
 
             return !showSearchResult.Any() ? BadRequest(new { message = "No tv show available for your search title." }) : new OkObjectResult(showSearchResult);
         }
@@ -84,16 +84,15 @@
         /// <param name="imdbId">The imdb identifier.</param>
         /// <returns>The actionresult.</returns>
         [HttpGet]
-        [Route("api/v1/dashboard/shows/{imdbId}")]
-        public async Task<IActionResult> GetShow([FromRoute] string imdbId)
+        [Route("api/v1/dashboard/show/{imdbId}")]
+        public async Task<IActionResult> GetShowByIMDbId([FromRoute] string imdbId)
         {
             if (string.IsNullOrEmpty(imdbId)) { return BadRequest("Invalid parameter."); }
 
-            var showResult = await _imdbService.GetShowById(imdbId);
+            var showResult = await _imdbService.GetShowByIMDbId(imdbId);
 
             return showResult == null ? BadRequest(new { message = "No tv show available for your imdbId. Please check the imdbId" }) : new OkObjectResult(showResult);
         }
-
 
         /// <summary>
         /// Gets the episodes.
@@ -102,12 +101,12 @@
         /// <param name="seasonNumber">The season number.</param>
         /// <returns>The actionresult.</returns>
         [HttpGet]
-        [Route("api/v1/dashboard/shows/{imdbId}/seasons/{seasonNumber}")]
-        public async Task<IActionResult> GetEpisodes([FromRoute] string imdbId, [FromRoute] string seasonNumber)
+        [Route("api/v1/dashboard/show/{imdbId}/seasons/{seasonNumber}")]
+        public async Task<IActionResult> GetEpisodesByIMDbIdAndSeasonNumber([FromRoute] string imdbId, [FromRoute] string seasonNumber)
         {
             if (string.IsNullOrEmpty(imdbId) || string.IsNullOrEmpty(seasonNumber)) { return BadRequest("Invalid parameter."); }
 
-            var imdbSeasons = await _imdbService.GetEpisodes(imdbId, int.Parse(seasonNumber));
+            var imdbSeasons = await _imdbService.GetEpisodesByIMDbIdAndSeasonNumber(imdbId, int.Parse(seasonNumber));
 
             return !imdbSeasons.Any() ? BadRequest(new { message = "No episodes available for your imdbId and season." }) : new OkObjectResult(imdbSeasons);
         }

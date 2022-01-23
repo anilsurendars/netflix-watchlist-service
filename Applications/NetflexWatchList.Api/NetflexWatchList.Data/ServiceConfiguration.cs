@@ -23,6 +23,7 @@
             services.AddDbContext<INetflixWatchlistDbContext, NetflixWatchlistDbContext>(opt => opt.UseSqlServer(option.ConnectionString));
 
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IShowRepository, ShowRepository>();
 
             return services;
         }

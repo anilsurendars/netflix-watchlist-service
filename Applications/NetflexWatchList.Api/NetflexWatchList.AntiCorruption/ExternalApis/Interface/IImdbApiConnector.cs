@@ -14,14 +14,14 @@ namespace NetflexWatchList.AntiCorruption.ExternalApis.Interface
         /// </summary>
         /// <param name="title">The title.</param>
         /// <returns>The list of IMDbSearchResult.</returns>
-        Task<IList<ImdbSearchResult>> GetShows(string title);
+        Task<IList<ImdbSearchResult>> SearchShowByTitle(string title);
 
         /// <summary>
         /// Gets the show by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>The IMDbShow.</returns>
-        Task<ImdbShow> GetShowById(string id);
+        Task<ImdbShow> GetShowByIMDbId(string id);
 
         /// <summary>
         /// Gets the episodes.
@@ -29,7 +29,7 @@ namespace NetflexWatchList.AntiCorruption.ExternalApis.Interface
         /// <param name="imdbId">The imdb identifier.</param>
         /// <param name="seasonNumber">The season number.</param>
         /// <returns>The list of ImdbEpisode.</returns>
-        Task<IList<ImdbEpisode>> GetEpisodes(string imdbId, int seasonNumber);
+        Task<IList<ImdbEpisode>> GetEpisodesByIMDbIdAndSeasonNumber(string imdbId, int seasonNumber);
 
         /// <summary>
         /// Gets all shows.
